@@ -1,0 +1,16 @@
+{
+  "name": "mapnik-tiles",
+  "version": "0.0.1",
+  "description": "serve tiles using mapnik and postgis",
+  "main": "app.js",
+  "repository": "git@github.com:luqinghui/mapnik-tiles.git",
+  "author": "luqinghui <luqinghui0613@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@mapbox/sphericalmercator": "^1.1.0",
+    "koa": "^2.9.0",
+    "koa-router": "^7.4.0",
+    "mapnik": "^4.3.1"
+  },
+  "devDependencies": {}
+}
