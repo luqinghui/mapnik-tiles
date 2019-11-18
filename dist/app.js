@@ -10,9 +10,11 @@ if (mapnik.register_default_input_plugins)
   mapnik.register_default_input_plugins();
 
 const postgis_setting = {
+  host: "postgresql",
   dbname: "geo",
-  table: "test_points_100m",
+  table: "test_data.test_point_1m_4326",
   user: "postgres",
+  password: "postgres153479",
   type: "postgis"
 };
 
@@ -22,6 +24,7 @@ const WIDTH = 256;
 const HEIGHT = 256;
 
 const PROJ3857 = "+init=epsg:3857";
+const PROJ4326 = "+init=epsg:4326";
 
 const app = new Koa();
 
@@ -67,7 +70,7 @@ router.get("/tiles/:z/:x/:y.png", async (ctx, next) => {
 
   // mapnik
   let map = new mapnik.Map(WIDTH, HEIGHT, PROJ3857);
-  let layer = new mapnik.Layer("tile", PROJ3857);
+  let layer = new mapnik.Layer("tile", PROJ4326);
   let postgis = new mapnik.Datasource(postgis_setting);
 
   map.bufferSize = 64;
@@ -89,3 +92,5 @@ app.use(router.routes());
 
 app.listen(PORT);
 console.log(`"app started at port ${PORT}...`);
+
+// TODO 修改pg容器
