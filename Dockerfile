@@ -2,14 +2,14 @@ FROM node:carbon-jessie
 
 WORKDIR /app
 
-RUN apt-get update \
-    && apt-get install yarn \
-    && apt-get update \
-    && yarn install
+COPY ./package.json /app/package.json
+COPY ./yarn.lock /app/yarn.lock
+
+RUN yarn install
 
 ENV PORT=8001
 
-CMD node app.js
+CMD yarn run start
 
 EXPOSE 8001
 
