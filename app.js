@@ -10,13 +10,13 @@ if (mapnik.register_default_input_plugins)
   mapnik.register_default_input_plugins();
 
 const postgis_setting = {
-  dbname: "postgis",
-  table: "test_points",
+  dbname: "geo",
+  table: "test_points_100m",
   user: "postgres",
   type: "postgis"
 };
 
-const PORT = 8001;
+const PORT = process.env.PORT;
 
 const WIDTH = 256;
 const HEIGHT = 256;
