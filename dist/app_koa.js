@@ -12,7 +12,7 @@ if (mapnik.register_default_input_plugins)
 const postgis_setting = {
   host: "postgis",
   dbname: "postgres",
-  table: `(select geom as geom from test_data.test_points_1m_4326) as foo`,
+  table: "test_data.test_points_1m_4326",
   user: "postgres",
   password: "123456",
   type: "postgis"
@@ -96,5 +96,3 @@ app.use(router.routes());
 
 app.listen(PORT);
 console.log(`"app started at port ${PORT}...`);
-
-// TODO 修改pg容器

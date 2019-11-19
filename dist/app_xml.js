@@ -9,7 +9,7 @@ const Mercator = require("@mapbox/sphericalmercator");
 if (mapnik.register_default_input_plugins)
   mapnik.register_default_input_plugins();
 
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 8001;
 
 const WIDTH = 256;
 const HEIGHT = 256;
@@ -23,7 +23,7 @@ const TMS_SCHEME = false;
 
 async function renderImage(map, x, y, zoom) {
   return new Promise((resolve, reject) => {
-    map.load(path.join(__dirname, "point.xml"), { strict: true }, function(
+    map.load(path.join(__dirname, "point.xml"), { strict: true }, function (
       err,
       map
     ) {
@@ -40,7 +40,7 @@ async function renderImage(map, x, y, zoom) {
       // render image
       let im = new mapnik.Image(map.width, map.height);
 
-      map.render(im, function(err, im) {
+      map.render(im, function (err, im) {
         if (err) {
           console.log(err);
           reject(err);
@@ -67,11 +67,11 @@ router.get("/tiles/:z/:x/:y.png", async (ctx, next) => {
   map.bufferSize = 64;
 
   await renderImage(map, x, y, zoom)
-    .then(function(value) {
+    .then(function (value) {
       ctx.type = "png";
       ctx.body = value;
     })
-    .catch(function(err) {
+    .catch(function (err) {
       ctx.type = "json";
       ctx.body = { err };
     });
