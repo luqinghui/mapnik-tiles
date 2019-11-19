@@ -10,11 +10,11 @@ if (mapnik.register_default_input_plugins)
   mapnik.register_default_input_plugins();
 
 const postgis_setting = {
-  host: "postgresql",
-  dbname: "geo",
-  table: "test_data.test_point_1m_4326",
+  host: "postgis",
+  dbname: "postgres",
+  table: `(select geom as geom from test_data.test_points_1m_4326) as foo`,
   user: "postgres",
-  password: "postgres153479",
+  password: "123456",
   type: "postgis"
 };
 
@@ -36,7 +36,10 @@ async function renderImage(map, layer, x, y, zoom) {
       path.join(__dirname, "point_vector.xml"),
       { strict: true },
       function(err, map) {
-        if (err) reject(err);
+        if (err) {
+          console.log(err);
+          reject(err);
+        }
         map.add_layer(layer);
 
         // xyz to bbox
@@ -49,6 +52,7 @@ async function renderImage(map, layer, x, y, zoom) {
 
         map.render(im, function(err, im) {
           if (err) {
+            console.log(err);
             reject(err);
           } else {
             let img = im.encodeSync("png");
