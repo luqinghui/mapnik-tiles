@@ -9,8 +9,6 @@ const Mercator = require("@mapbox/sphericalmercator");
 if (mapnik.register_default_input_plugins)
   mapnik.register_default_input_plugins();
 
-const PORT = process.env.PORT || 8001;
-
 const WIDTH = 256;
 const HEIGHT = 256;
 
@@ -79,5 +77,5 @@ router.get("/tiles/:z/:x/:y.png", async (ctx, next) => {
 
 app.use(router.routes());
 
-app.listen(PORT);
-console.log(`"app started at port ${PORT}...`);
+app.listen(process.env.port || 8001);
+console.log(`app started at port ${PORT}...`);

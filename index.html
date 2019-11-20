@@ -1,46 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.1.1/css/ol.css"
-      type="text/css"
-    />
-    <style>
-      html,
-      body {
-        height: 100%;
-        width: 100%;
-      }
-      .map {
-        height: 100%;
-        width: 100%;
-      }
-    </style>
-    <script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.1.1/build/ol.js"></script>
-    <title>Mapnik PostGIS example</title>
-  </head>
 
-  <body>
-    <div id="map" class="map"></div>
-    <script type="text/javascript">
-      var map = new ol.Map({
-        target: "map",
-        layers: [
-          new ol.layer.Tile({
-            source: new ol.source.OSM()
-          }),
-          new ol.layer.Tile({
-            source: new ol.source.XYZ({
-              url: "http://localhost:8001/tiles/{z}/{x}/{y}.png"
-            })
+<head>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.1.1/css/ol.css"
+    type="text/css" />
+  <style>
+    html,
+    body {
+      height: 100%;
+      width: 100%;
+    }
+
+    .map {
+      height: 100%;
+      width: 100%;
+    }
+
+  </style>
+  <script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.1.1/build/ol.js"></script>
+  <title>Mapnik PostGIS example</title>
+</head>
+
+<body>
+  <div id="map" class="map"></div>
+  <script type="text/javascript">
+    var map = new ol.Map({
+      target: "map",
+      layers: [
+        new ol.layer.Tile({
+          source: new ol.source.OSM()
+        }),
+        new ol.layer.Tile({
+          source: new ol.source.XYZ({
+            url: "http://10.211.55.8:8099/points/{z}/{x}/{y}/tile.png"
           })
-        ],
-        view: new ol.View({
-          center: ol.proj.fromLonLat([106.568031, 34.511884]),
-          zoom: 4
         })
-      });
-    </script>
-  </body>
+      ],
+      view: new ol.View({
+        center: ol.proj.fromLonLat([106.568031, 34.511884]),
+        zoom: 4
+      })
+    });
+  </script>
+</body>
+
 </html>
